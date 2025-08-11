@@ -18,7 +18,7 @@ app.use(cors({
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3001", // Two Frontend Component Can talk each other
+    origin: "https://sukhdev-editor.vercel.app", // Two Frontend Component Can talk each other
     methods: ["GET", "POST"]
   }
 });
@@ -66,11 +66,13 @@ app.use('/logout',log_out);
 app.use('/editor',send_details); // Route : /editor/send_details
 app.use('/Draw',send_details); //Route : /Draw/send_details
 
-server.listen(3000, function () {
-    console.log("App is  listning on port 3000");
-})
+const PORT = process.env.PORT || 3000;
+server.listen(PORT, () => {
+    console.log(`🚀 App is listening on port ${PORT}`);
+});
 
 
 // Accounts : 
 // Dinasha123@gmail.com : 12456
+
 // Sukhdevvinay9693@gmail.com : 123456
