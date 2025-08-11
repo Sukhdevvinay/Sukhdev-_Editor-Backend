@@ -11,14 +11,14 @@ const cookieParser = require('cookie-parser');
 const cors = require('cors');
 
 app.use(cors({
-  origin: true,
+  origin: "https://sukhdev-editor.vercel.app/",
   credentials: true
 }));
 
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3001", // Two Frontend Component Can talk each other
+    origin: "https://sukhdev-editor.vercel.app/", // Two Frontend Component Can talk each other
     methods: ["GET", "POST"]
   }
 });
@@ -73,4 +73,5 @@ server.listen(3000, function () {
 
 // Accounts : 
 // Dinasha123@gmail.com : 12456
+
 // Sukhdevvinay9693@gmail.com : 123456
