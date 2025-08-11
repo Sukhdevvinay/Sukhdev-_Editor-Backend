@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const mongourl = "mongodb://localhost:27017/Editor";
+const mongourl = "mongodb+srv://Vinay:<db_password>@sukhdeveditordatabase.iqckrof.mongodb.net/?retryWrites=true&w=majority&appName=SukhdevEditorDatabase";
 
 const connectmongodb = async () => {
     try {
@@ -9,5 +9,6 @@ const connectmongodb = async () => {
         console.error("Failed to connect to DBMS:", error);
     }
 };
+
 
 module.exports = connectmongodb;
