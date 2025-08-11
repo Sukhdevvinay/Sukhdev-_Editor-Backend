@@ -13,9 +13,10 @@ const server = http.createServer(app);
 
 // ✅ Very permissive CORS for both HTTP & WS
 app.use(cors({
-  origin: "*", // Allow all origins
+  origin: "https://sukhdev-editor.vercel.app", // exact frontend origin
   credentials: true
 }));
+
 
 // ===== MIDDLEWARE =====
 app.use(express.json());
@@ -32,9 +33,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 // const server = http.createServer(app);
 
 // ✅ Socket.IO CORS
-const io = new Server({
-  cors: '*', // Allow all origins
-  maxHttpBufferSize: 1e8
+const io = new Server(server, {
+  cors: {
+    origin: "https://sukhdev-editor.vercel.app", // exact frontend origin
+    methods: ["GET", "POST"],
+    credentials: true
+  }
 });
 
 io.attach(server);
@@ -87,5 +91,6 @@ const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
     console.log(`🚀 App is listening on port ${PORT}`);
 });
+
 
 
