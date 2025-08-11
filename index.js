@@ -27,11 +27,13 @@ const server = http.createServer(app);
 // ✅ Socket.IO CORS
 const io = new Server(server, {
   cors: {
-    origin: "https://sukhdev-editor.vercel.app", // no trailing slash
+    origin: FRONTEND_URL,
     methods: ["GET", "POST"],
     credentials: true
-  }
+  },
+  allowEIO3: true // allow older engine.io protocol versions just in case
 });
+
 
 // ===== SOCKET.IO EVENTS =====
 let users = {};
@@ -84,3 +86,4 @@ const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
     console.log(`🚀 App is listening on port ${PORT}`);
 });
+
