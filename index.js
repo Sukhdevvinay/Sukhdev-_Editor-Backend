@@ -9,30 +9,35 @@ const cors = require('cors');
 connectmongodb();
 
 const app = express();
-
-// ✅ CORS for frontend
-app.use(cors({
-  origin: "https://sukhdev-editor.vercel.app", // no trailing slash
-  credentials: true
-}));
-
-// ✅ Allow preflight requests for all routes
-app.options('*', cors({
-  origin: "https://sukhdev-editor.vercel.app",
-  credentials: true
-}));
-
 const server = http.createServer(app);
 
+// ✅ Very permissive CORS for both HTTP & WS
+app.use(cors({
+  origin: "*", // Allow all origins
+  credentials: true
+}));
+
+// ===== MIDDLEWARE =====
+app.use(express.json());
+app.use(cookieParser());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public')));
+
+// // ✅ Allow preflight requests for all routes
+// app.options('*', cors({
+//   origin: "https://sukhdev-editor.vercel.app",
+//   credentials: true
+// }));
+
+// const server = http.createServer(app);
+
 // ✅ Socket.IO CORS
-const io = new Server(server, {
-  cors: {
-    origin: FRONTEND_URL,
-    methods: ["GET", "POST"],
-    credentials: true
-  },
-  allowEIO3: true // allow older engine.io protocol versions just in case
+const io = new Server({
+  cors: '*', // Allow all origins
+  maxHttpBufferSize: 1e8
 });
+
+io.attach(server);
 
 
 // ===== SOCKET.IO EVENTS =====
@@ -59,11 +64,7 @@ io.on("connection", (socket) => {
   });
 });
 
-// ===== MIDDLEWARE =====
-app.use(express.json());
-app.use(cookieParser());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'public')));
+
 
 // ===== ROUTES =====
 const login = require('./Routes/login');
@@ -86,4 +87,5 @@ const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
     console.log(`🚀 App is listening on port ${PORT}`);
 });
+
 
