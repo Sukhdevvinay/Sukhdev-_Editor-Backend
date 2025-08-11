@@ -11,15 +11,17 @@ const cookieParser = require('cookie-parser');
 const cors = require('cors');
 
 app.use(cors({
-  origin: true,
+  origin: "https://sukhdev-editor.vercel.app", // remove trailing slash
   credentials: true
 }));
 
 const server = http.createServer(app);
+
 const io = new Server(server, {
   cors: {
-    origin: "https://sukhdev-editor.vercel.app", // Two Frontend Component Can talk each other
-    methods: ["GET", "POST"]
+    origin: "https://sukhdev-editor.vercel.app", // remove trailing slash
+    methods: ["GET", "POST"],
+    credentials: true
   }
 });
 
@@ -76,3 +78,4 @@ server.listen(PORT, () => {
 // Dinasha123@gmail.com : 12456
 
 // Sukhdevvinay9693@gmail.com : 123456
+
