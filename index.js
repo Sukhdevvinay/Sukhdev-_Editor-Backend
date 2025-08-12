@@ -14,7 +14,7 @@ const server = http.createServer(app);
 // ✅ Very permissive CORS for both HTTP & WS
 app.use(cors({
   origin: "https://sukhdev-editor.vercel.app", // exact frontend origin
-  credentials: true
+  // credentials: true
 }));
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', 'https://sukhdev-editor.vercel.app');
@@ -42,7 +42,7 @@ const io = new Server(server, {
   cors: {
     origin: "https://sukhdev-editor.vercel.app", // exact frontend origin
     methods: ["GET", "POST"],
-    credentials: true
+    // credentials: true
   }
 });
 
@@ -96,6 +96,7 @@ const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
     console.log(`🚀 App is listening on port ${PORT}`);
 });
+
 
 
 
