@@ -5,7 +5,14 @@ const User = require('../models/User');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
 
+app.use(cors({
+  origin: ["https://sukhdev-editor.vercel.app"],
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
+app.use(express.json());
 app.use(cookieParser());
 
 router.post('/login', async (req, res) => {
@@ -30,3 +37,4 @@ router.post('/login', async (req, res) => {
 });
 
 module.exports = router;
+
