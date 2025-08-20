@@ -19,7 +19,12 @@ const server = http.createServer(app);
 //   origin: "https://sukhdev-editor.vercel.app", // exact frontend origin
 //   // credentials: true
 // }));
-app.use(cors());
+app.use(cors({
+  origin: ["https://sukhdev-editor.vercel.app"],
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
+// app.use(cors());
 
 // app.use((req, res, next) => {
 //   res.setHeader('Access-Control-Allow-Origin', 'https://sukhdev-editor.vercel.app');
@@ -114,6 +119,7 @@ const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
     console.log(`🚀 App is listening on port ${PORT}`);
 });
+
 
 
 
