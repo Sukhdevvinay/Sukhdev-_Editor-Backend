@@ -1,8 +1,16 @@
 const express = require('express');
+const app = express();
 const User = require('../models/User');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
 
+app.use(cors({
+  origin: ["https://sukhdev-editor.vercel.app"],
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
+
+app.use(express.json());
 router.get('/send_details', isLoggedIn, async(req,res) => {
     let user_email = req.User_data.email; // Cookie se Aye email 
     try {
@@ -29,3 +37,4 @@ function isLoggedIn(req, res, next) {
 }
 
 module.exports = router;
+
