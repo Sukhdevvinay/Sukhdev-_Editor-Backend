@@ -6,6 +6,12 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
 
+app.use(cors({
+  origin: ["https://sukhdev-editor.vercel.app"],
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
+app.use(express.json());
 app.use(cookieParser());
 
 router.post('/save_text',isLoggedIn,async (req, res) => {
@@ -46,3 +52,4 @@ function isLoggedIn(req, res, next) {
     }
 }
 module.exports = router;
+
