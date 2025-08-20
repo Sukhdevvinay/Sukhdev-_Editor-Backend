@@ -50,10 +50,18 @@ app.use(express.static(path.join(__dirname, 'public')));
 //     // credentials: true
 //   }
 // });
-const io = new SocketServer({
-    cors: '*',
-    maxHttpBufferSize: 1e8
-})
+const io = new SocketServer(server, {
+  cors: {
+    origin: ["https://sukhdev-editor.vercel.app"],  // ✅ allow Vercel frontend
+    methods: ["GET", "POST"],
+    credentials: true
+  },
+  maxHttpBufferSize: 1e8
+});
+// const io = new SocketServer({
+//     cors: '*',
+//     maxHttpBufferSize: 1e8
+// })
 
 io.attach(server);
 
@@ -106,6 +114,7 @@ const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
     console.log(`🚀 App is listening on port ${PORT}`);
 });
+
 
 
 
