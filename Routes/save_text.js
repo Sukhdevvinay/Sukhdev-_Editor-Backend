@@ -5,6 +5,7 @@ const User = require('../models/User');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
+const cors = require("cors");
 
 app.use(cors({
   origin: ["https://sukhdev-editor.vercel.app"],
@@ -52,4 +53,5 @@ function isLoggedIn(req, res, next) {
     }
 }
 module.exports = router;
+
 
