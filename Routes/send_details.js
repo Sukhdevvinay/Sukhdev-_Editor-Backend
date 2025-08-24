@@ -3,6 +3,7 @@ const app = express();
 const User = require('../models/User');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
+const cors = require("cors");
 
 app.use(cors({
   origin: ["https://sukhdev-editor.vercel.app"],
@@ -37,4 +38,5 @@ function isLoggedIn(req, res, next) {
 }
 
 module.exports = router;
+
 
