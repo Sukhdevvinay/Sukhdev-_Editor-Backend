@@ -7,7 +7,6 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
 const path = require('path');
-const cors = require("cors");
 
 app.use(cors({
   origin: ["https://sukhdev-editor.vercel.app"],
@@ -45,4 +44,5 @@ router.post('/signup', async (req, res) => {
 
 
 module.exports = router;
+
 
